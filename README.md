@@ -1,5 +1,8 @@
+Fixes #7
 # CSITTeam012
 CSITTeam012
+
+## Book My Show Clone 
 
 ## Team Name
 
