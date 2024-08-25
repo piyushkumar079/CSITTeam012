@@ -1,10 +1,9 @@
-Fixes #7
 # CSITTeam012
 CSITTeam012
 
 ## Book My Show Clone 
 
-## Team Name
+## Team Name : [Team Octet](https://github.com/IIITLucknowSWEngg/Assignment/issues/7)
 
 ## Team Members
 
