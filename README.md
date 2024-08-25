@@ -8,7 +8,7 @@ CSITTeam012
 
 ## Team Members
 
-- Vishal Parida : LIT2023044
+- Vishal Parida : vparida39@gmail.com : LIT2023044
 - Priyanshu Agarwal :pr.agarwal2005+github@gmail.com: LIT2023022
 - Piyush Kumar : LIT2023016
 - Hitarth Singh Rajput : hitxrth@gmail.com : LCS2023040
