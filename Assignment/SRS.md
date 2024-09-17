@@ -21,6 +21,7 @@ Notifications for booking confirmations, cancellations, and reminders.
 User: Any person using the application to book tickets.
 Admin: The person responsible for managing events, users, and venues.
 API: Application Programming Interface.
+
 2. Overall Description
 2.1 Product Perspective
 The system will be a web-based application that allows users to browse events and book tickets. The platform will include a frontend web interface for users and an admin dashboard for managing events and bookings.
@@ -95,12 +96,14 @@ The system should be accessible on multiple devices (desktop, tablet, mobile).
 4.4 Reliability and Availability
 The system should be available 99.9% of the time.
 Automatic daily backups of the database should be in place.
+
 5.⁠ ⁠External Interface Requirements
 5.1 User Interfaces
 Frontend: Responsive web design using HTML, CSS, and JavaScript (React/Vue).
 Admin Dashboard: Separate interface for admins with event and booking management tools.
 5.2 API Interfaces
 The application will communicate with third-party services like payment gateways via RESTful APIs.
+
 6.⁠ ⁠System Architecture
 The system will follow a three-tier architecture:
 
