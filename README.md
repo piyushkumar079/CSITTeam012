@@ -13,6 +13,6 @@ CSITTeam012
 - Hitarth Singh Rajput : hitxrth@gmail.com : LCS2023040
 - Aryam Agarwal : mailaryam1000@gmail.com : LCS2023045
 - Dev Darshan : devdarshanpatra4@gmail.com LCS2023012
-- Satyajit Sahoo : LCS2023013
+- Satyajit Sahoo : satyajitsahoo1206@gmail.com LCS2023013
 - Sarthak Nayyar : sarthaknayyar6@gmail.com : LCS2023039
 
