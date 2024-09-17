@@ -95,3 +95,15 @@ The system should be accessible on multiple devices (desktop, tablet, mobile).
 4.4 Reliability and Availability
 The system should be available 99.9% of the time.
 Automatic daily backups of the database should be in place.
+5.⁠ ⁠External Interface Requirements
+5.1 User Interfaces
+Frontend: Responsive web design using HTML, CSS, and JavaScript (React/Vue).
+Admin Dashboard: Separate interface for admins with event and booking management tools.
+5.2 API Interfaces
+The application will communicate with third-party services like payment gateways via RESTful APIs.
+6.⁠ ⁠System Architecture
+The system will follow a three-tier architecture:
+
+Frontend: User-facing interface built with React or Vue.
+Backend: Node.js/Express to handle business logic and data processing.
+Database: A NoSQL database like MongoDB to store user information, events, and bookings
