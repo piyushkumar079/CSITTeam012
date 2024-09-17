@@ -108,7 +108,3 @@ This document outlines the various stakeholders involved in the **Book My Show C
 
 ## Conclusion  
 This document outlines the key stakeholders for the **Book My Show Clone** project, including users, event organizers, advertisers, and customer support. Indirect stakeholders such as regulators, sponsors, and technology vendors also play a significant role. By addressing their needs and maintaining effective communication, the project aims to deliver a successful and well-rounded ticketing platform.  
-
----
-
-This stakeholders.md file highlights various roles and their interests for your Book My Show Clone project.
