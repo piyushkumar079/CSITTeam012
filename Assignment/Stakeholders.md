@@ -1,7 +1,3 @@
-Here's a stakeholders.md file tailored for a Book My Show Clone project:
-
----
-
 # Stakeholders  
 This document outlines the various stakeholders involved in the **Book My Show Clone** project. Understanding their roles, interests, and impact on the project is crucial for ensuring the app’s success in meeting the diverse needs of its users. Stakeholders are classified into direct and indirect categories to highlight their influence and responsibilities.
 
