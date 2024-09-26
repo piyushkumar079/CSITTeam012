@@ -1,4 +1,4 @@
-<div hidden>
+<!--
 ```
 @startuml Activity_Registered
 actor User
@@ -60,5 +60,5 @@ BMSApp -> User: Show booking confirmation and ticket details
 end
 @enduml
 ```
-</div>
-![image](Activity_Registered.svg)
+-->
+![](Activity_Registered.svg)
