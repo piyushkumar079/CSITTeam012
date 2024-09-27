@@ -89,4 +89,4 @@ Admin -- Movie : updates
 Admin -- Events : manages
 @enduml
 ```
-![image](https://github.com/devdrx/devd-blog/blob/master/public/classdiagram.png)
+![image](https://i.imgur.com/7xY1SDA.png)
