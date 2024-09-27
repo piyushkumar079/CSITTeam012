@@ -1,8 +1,8 @@
-# Stakeholder Register for Bookt My Show Clone
+# Stakeholder Register for Book My Show Clone
 
 ## Introduction
 
-This document serves as a comprehensive **Stakeholder Register** for the **Book My Show Clone** project, outlining the various stakeholders involved in its development and operation. Each stakeholder plays a crucial role in shaping the platform's functionality and user experience, making it essential to understand their interests, responsibilities, and potential impact on the project's success. Stakeholders are classified into **internal** and **external** categories to illustrate their direct influence and engagement with the platform. By identifying and analyzing these stakeholders, we aim to foster effective communication, collaboration, and alignment of goals, ultimately ensuring that the app meets the diverse needs of its users and achieves its strategic objectives.
+This document serves as a comprehensive **Stakeholder Register** for the **Book My Show Clone** project, outlining the various stakeholders involved in its development and operation. Each stakeholder plays a crucial role in shaping the platform's functionality and user experience, making it essential to understand their interests, responsibilities, and potential impact on the project's success. Stakeholders are classified into **internal** and **external** categories to illustrate their direct influence and engagement with the platform. By identifying and analyzing these stakeholders, we aim to foster effective communication, collaboration, and alignment of goals, ultimately ensuring that the website meets the diverse needs of its users and achieves its strategic objectives.
 
 
 ---
