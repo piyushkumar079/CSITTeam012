@@ -1,5 +1,4 @@
-# Software Requirements Specification (SRS) for BookMyShow Clone Website
-
+# Software Requirements Specification (SRS) - Book My Show Clone
 ## 1. Introduction
 
 ### 1.1 Purpose  
