@@ -1,5 +1,5 @@
-<!--
-```
+
+```plantUML
 @startuml Activity_Registered
 actor User
 participant "BookMyShow App" as BMSApp
@@ -60,6 +60,5 @@ BMSApp -> User: Show booking confirmation and ticket details
 end
 @enduml
 ```
--->
 
 ![](Activity_Registered.svg)
