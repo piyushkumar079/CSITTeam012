@@ -137,3 +137,28 @@ This document outlines the user requirements for the **BookMyShow** platform, wh
 ### 5.4 Review and Rating Interface
 - Form for users to submit ratings and reviews, including text input and star ratings.
 - Display of average ratings and user reviews on event or movie pages, with options to filter by date or relevance.
+
+
+# Detailed Cross-Reference Matrix for Book MY Show
+
+## **Key Features**
+- Movie selection
+- Theatre and seat booking
+- Payment gateway
+- Ticket generation
+- User reviews and ratings
+- Notifications and reminders
+
+---
+
+## **Modules vs Features**
+
+| Module                    | Movie Selection | Theatre/Seat Booking | Payment Gateway | Ticket Generation | Reviews/Ratings | Notifications |
+|---------------------------|-----------------|-----------------------|-----------------|-------------------|-----------------|---------------|
+| **User Module**           | ✅              | ✅                    | ✅              | ✅                | ✅              | ✅            |
+| **Admin Module**          | ✅              | ✅                    | ✅              | ✅                | ❌              | ❌            |
+| **Theatre Management**    | ❌              | ✅                    | ❌              | ✅                | ❌              | ✅            |
+| **Payment System**        | ❌              | ❌                    | ✅              | ✅                | ❌              | ❌            |
+
+---
+
