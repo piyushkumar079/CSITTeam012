@@ -1,11 +1,4 @@
 # CSITTeam012
-CSITTeam012
-
-## Book My Show Clone 
-
-## Team Name : [Team Octet](https://github.com/IIITLucknowSWEngg/Assignment/issues/7)
-
-# CSITTeam012
 ## Team Name : [Team Octet](https://github.com/IIITLucknowSWEngg/Assignment/issues/7)
 
 **Project Idea**: Book My Show Clone  
@@ -23,6 +16,14 @@ CSITTeam012
 | Satyajit Sahoo     | satyajitsahoo1206@gmail.com      | LCS2023013  | Computer Science     | [satyajit1206](https://github.com/satyajit1206)                       |
 | Sarthak Nayyar     | sarthaknayyar6@gmail.com         | LCS2023039  | Computer Science     | [sarthaknayyar](https://github.com/sarthaknayyar)                       |
 
+---
+
+<p align="center" >
+    <img src="https://github.com/user-attachments/assets/26515e22-2f2d-412a-9106-f178586bf345" width="420">
+</p>
+
+## Book My Show Clone 
+The BookMyShow clone will feature secure user authentication, personalized profiles, and an intuitive event browsing system with advanced filters. Users can select seats in real-time and make bookings through multiple payment gateways. The platform will offer personalized event recommendations, booking history management, and e-ticket downloads with QR codes. Admins will have a dedicated panel for event management and analytics. Additionally, users can leave reviews, receive notifications, and enjoy multi-language and multi-currency support for a seamless booking experience.
 
 ## Documents
 
