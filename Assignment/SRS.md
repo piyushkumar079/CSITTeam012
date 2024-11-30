@@ -1,147 +1,221 @@
-# Software Requirements Specification (SRS) - Book My Show Clone
+# Software Requirements Specification (SRS) for BookMyShow Clone
+
+## Version: 1.0  
+Prepared by: CSITTeam012 (Team Octet)  
+Date Created: November 30, 2024
+
+---
+
+## Table of Contents
+
+1. **Introduction**  
+   1.1 Purpose  
+   1.2 Document Conventions  
+   1.3 Intended Audience and Reading Suggestions  
+   1.4 Product Scope  
+   1.5 References  
+
+2. **Overall Description**  
+   2.1 Product Perspective  
+   2.2 Product Functions  
+   2.3 User Classes and Characteristics  
+   2.4 Operating Environment  
+   2.5 Design and Implementation Constraints  
+   2.6 User Documentation  
+   2.7 Assumptions and Dependencies  
+
+3. **External Interface Requirements**  
+   3.1 User Interfaces  
+   3.2 Hardware Interfaces  
+   3.3 Software Interfaces  
+   3.4 Communications Interfaces  
+
+4. **System Features**  
+   4.1 User Registration and Login  
+   4.2 Booking System  
+   4.3 Payment Gateway Integration  
+   4.4 Event Management  
+
+5. **Other Nonfunctional Requirements**  
+   5.1 Performance Requirements  
+   5.2 Safety Requirements  
+   5.3 Security Requirements  
+   5.4 Software Quality Attributes  
+   5.5 Business Rules  
+
+6. **Other Requirements**
+
+---
+
 ## 1. Introduction
 
 ### 1.1 Purpose  
-The purpose of this document is to define the specific requirements and functionalities for the development of an event and movie booking website, modeled after BookMyShow. This platform will allow users to book tickets for a variety of entertainment events, including movies, concerts, and theater performances across multiple cities in India. The document serves as a guide for developers, stakeholders, and other team members.
+The purpose of this Software Requirements Specification (SRS) is to outline the functional and non-functional requirements for the BookMyShow Clone application. The goal of this application is to provide users with an online platform to browse, select, and book tickets for movies and events. This document serves as a comprehensive guide for developers, stakeholders, and project managers, ensuring that all expectations are clearly defined and understood.
 
 ### 1.2 Document Conventions  
-This document adheres to standard SRS formatting guidelines. Requirements are organized into functional (section 4) and non-functional (section 5) categories.
+- All inline mathematical expressions will use `$` for LaTeX-style notation.  
+- Functional requirements are identified using the "REQ-" prefix.  
+- Priorities for each requirement are labeled as **High**, **Medium**, or **Low**.  
+- Code snippets or sample configurations are provided where necessary.
 
 ### 1.3 Intended Audience and Reading Suggestions  
-This document is intended for:
-- **Developers:** To implement the functionalities.
-- **Testers:** To ensure the system meets functional and performance requirements.
-- **Project Managers:** To track progress and manage scope.
-- **Stakeholders:** To understand the system features.
-
-Recommended sections:
-- **Developers:** Focus on sections 2, 3, and 4.
-- **Testers:** Emphasize sections 4 and 5.
-- **Project Managers:** Overview of sections 2 and 5.
+- **Developers**: Focus on sections 3 and 4, which contain technical implementation details and system feature specifications.
+- **Testers**: Refer to all sections, with particular attention to functional and performance requirements for system validation.
+- **Project Managers**: Sections 1, 2, and 5 provide high-level project details, system scope, and non-functional requirements.
 
 ### 1.4 Product Scope  
-The website will provide a comprehensive platform for users to book tickets for movies and events in cities across India. It will offer users an easy and fast way to search for events, select seats, and make payments online, simplifying the ticket-booking process. The system will also provide features for event organizers to list their events and manage bookings.
+The BookMyShow Clone is a web-based application that allows users to:
+- Browse movies and events.
+- Select movies or events for booking.
+- Choose available seats in a real-time seat map.
+- Securely pay for tickets via integrated payment gateways.
 
-### 1.5 Definitions, Acronyms, and Abbreviations
-- **User:** Any individual using the system to book tickets.
-- **Admin:** User responsible for managing events, users, and bookings.
-- **API:** Application Programming Interface.
-- **GDPR:** General Data Protection Regulation.
-- **PCI DSS:** Payment Card Industry Data Security Standard.
+The platform will also feature admin functionalities to manage movie schedules, events, and bookings.
 
-### 1.6 References  
-- [BookMyShow](https://in.bookmyshow.com)  
-- Software Engineering by Ian Sommerville  
-- OWASP Security Guidelines for Web Applications  
-- PCI DSS Compliance Standards
+### 1.5 References  
+- IEEE SRS Template by Karl E. Wiegers, 1999.  
+- MERN Stack Documentation (MongoDB, Express, ReactJS, Node.js)  
+- PostgreSQL Documentation
+
+---
 
 ## 2. Overall Description
 
 ### 2.1 Product Perspective  
-This product is a web-based application that operates as an aggregator service for the entertainment industry. It allows users to browse and book tickets for movies, concerts, theater performances, and other events. The platform will integrate with third-party payment gateways and use real-time seat management systems to offer a seamless experience. The system will follow a three-tier architecture:  
-1. **Frontend:** User-facing interface built with technologies like React or Vue.js.  
-2. **Backend:** Business logic and server-side processing using Node.js/Express.  
-3. **Database:** NoSQL database like MongoDB for storing user data, bookings, and event details.
+The BookMyShow Clone is a standalone web application inspired by the BookMyShow platform. The system will operate using the **MERN Stack** (MongoDB, Express.js, ReactJS, Node.js) for the backend and frontend development. The application aims to replicate core functionalities such as ticket booking, event management, and payment integration.
 
 ### 2.2 Product Functions  
-- **Browse Events/Movies:** Users can search for events/movies by location, genre, or popularity.
-- **Ticket Booking:** Users can select their preferred time slot, event/movie, and book tickets by choosing available seats.
-- **Payment Gateway Integration:** Secure online payment through multiple gateways like PayPal, Stripe, UPI, and net banking.
-- **User Account Management:** Users can create and manage profiles, view booking history, and manage personal preferences.
-- **Notifications:** Users receive reminders and booking confirmations via email/SMS.
-- **Event Listing for Organizers:** Event organizers can list their events, set ticket prices, and monitor sales.
+The system will support the following major functionalities:
+1. **User Registration and Login**: Users must be able to register and log in with their credentials.
+2. **Event Browsing**: Users can browse upcoming movies and events.
+3. **Seat Booking**: Users can select seats in a real-time seat map for movie or event bookings.
+4. **Payment Processing**: Secure online payment options for ticket purchases.
+5. **Admin Panel**: Admin users can manage movie schedules, user queries, and ticket sales.
 
 ### 2.3 User Classes and Characteristics  
-- **General Users:** Individuals booking tickets for personal or group use.
-- **Event Organizers:** Professionals listing events and managing ticket sales and bookings.
-- **Admin Users:** Internal staff managing user accounts, content, and platform security.
+- **End Users**: Moviegoers and event attendees. These users will register, browse events, and book tickets.
+- **Admin Users**: Administrators who manage events, ticket bookings, user information, and resolve queries.
+- **Support Staff**: Users who handle customer support inquiries related to bookings and events.
 
 ### 2.4 Operating Environment  
-The system will run as a web-based application accessible on multiple platforms (Windows, macOS, Linux) and via modern web browsers (Chrome, Firefox, Safari). It will also support mobile devices, ensuring responsive design.
+- **Frontend**: The application will be developed using **ReactJS**, ensuring compatibility with modern browsers such as Google Chrome and Mozilla Firefox.
+- **Backend**: The backend will be powered by **Node.js** and **Express.js** for handling API requests.
+- **Database**: **PostgreSQL** will be used to store user data, event details, and ticket information.
+- **Payment Gateway**: Integration with third-party APIs (such as Stripe or PayPal) for processing secure payments.
 
 ### 2.5 Design and Implementation Constraints  
-- **Scalability:** The system must handle a large volume of traffic during peak hours.
-- **Compliance:** The system must adhere to GDPR and PCI DSS standards for data protection and payment security.
-- **Cross-browser Compatibility:** The platform must function on all modern browsers.
+- The system must use **PostgreSQL** as the relational database.
+- The web application must comply with **HTTPS** for secure data transfer.
+- The platform must comply with **GDPR** and other relevant data protection regulations for user privacy.
 
 ### 2.6 User Documentation  
-- **User Guide:** Available for end-users to navigate through the booking process, manage accounts, and troubleshoot.
-- **Admin Documentation:** Instructions for administrators on managing event listings, users, and resolving system issues.
+User manuals, FAQs, and tutorial videos will be provided through the application’s help section to guide users in booking tickets, creating accounts, and troubleshooting common issues.
 
 ### 2.7 Assumptions and Dependencies  
-- Users must have stable internet access to book tickets.
-- Payment gateways must be fully functional for the system to process payments.
-- Events and movie listings depend on external data sources and APIs.
+- Users will have access to an internet-enabled device (PC, smartphone, tablet).
+- **Payment Gateway** APIs (Stripe, PayPal, etc.) will be available and functional.
+- The system assumes a stable internet connection for real-time booking and payments.
+
+---
 
 ## 3. External Interface Requirements
 
 ### 3.1 User Interfaces  
-- **Home Page:** Lists trending events and movies based on user location or preferences.
-- **Search Functionality:** Allows users to search by title, genre, city, or event type.
-- **Booking Interface:** Displays available seats, allowing users to choose their preferred seats.
-- **Checkout and Payment Page:** Integrates with secure payment gateways, showing order summary before confirmation.
-- **Profile Page:** Provides user access to their personal details, booking history, and preferences.
+The user interface will include:
+- **Homepage**: A landing page displaying featured movies/events.
+- **Registration/Login Page**: Forms for new user registration and login.
+- **Event Listings**: A page with filtering and searching options for events and movies.
+- **Seat Selection Page**: Real-time seat map for choosing available seats.
+- **Checkout Page**: User's booking summary and payment options.
+
+The UI will be designed to be responsive and user-friendly, ensuring a seamless experience across devices.
 
 ### 3.2 Hardware Interfaces  
-The platform will be hosted on cloud infrastructure and requires no special hardware for users. Servers will use standard web hosting configurations with appropriate scaling options to handle high traffic.
+The application will function on standard hardware including:
+- PCs with internet access.
+- Mobile devices (smartphones and tablets) with modern web browsers.
 
 ### 3.3 Software Interfaces  
-- **Payment Gateway Integration:** Includes APIs for processing payments via PayPal, Stripe, UPI, and net banking.
-- **Notification Service:** Integration with third-party email/SMS providers for sending booking confirmations and event reminders.
-- **Seat Availability APIs:** Real-time integration with cinema or event venues to display up-to-date seat availability.
+The following software interfaces will be integrated:
+- **Payment API**: Integration with third-party payment gateways (Stripe, PayPal, etc.).
+- **Email/SMS API**: To send booking confirmations and notifications.
+- **Admin Panel**: Web interface for event management and user control.
 
 ### 3.4 Communications Interfaces  
-- **HTTP/HTTPS Protocol:** For secure communication between users and the web server.
-- **SMTP Protocol:** For sending automated emails (confirmation, reminders).
-- **SMS API:** For sending booking confirmations via text message.
+- **HTTPS**: All communication between the frontend and backend will be secure, using HTTPS to prevent unauthorized data interception.
+- **WebSocket/Real-time API**: For real-time seat availability and booking updates.
+
+---
 
 ## 4. System Features
 
-### 4.1 System Feature 1: Movie and Event Search  
-- Users can search for movies and events using filters such as city, genre, date, and popularity.  
-- Search results display event details, venue, showtimes, and availability.
+### 4.1 User Registration and Login  
+**Description and Priority**:  
+User authentication is essential for allowing personalized experiences and secure booking. **Priority: High**.
 
-### 4.2 System Feature 2: Booking Process  
-- Users select an event/movie, choose a showtime, and pick seats from an interactive seat map.  
-- Users can proceed to payment after confirming the booking details.
+**Functional Requirements**:  
+- **REQ-1**: Users must register with their email address, name, and password.
+- **REQ-2**: Users should be able to log in using registered credentials (email and password).
+- **REQ-3**: Implement password recovery via email for users who forget their password.
+- **REQ-4**: Users can update their profile information (name, email, password).
 
-### 4.3 System Feature 3: Payment Integration  
-- Multiple payment options: credit/debit cards, net banking, UPI, and online wallets (PayPal, Stripe).  
-- The system will verify payment success or failure and update the booking status accordingly.
+### 4.2 Booking System  
+**Description and Priority**:  
+Users should be able to browse events, select movies, and book tickets through a real-time seat map. **Priority: High**.
 
-### 4.4 System Feature 4: Event Organizer Portal  
-- Event organizers can register and log in to manage events.  
-- They can list new events, set prices, and track ticket sales.
+**Functional Requirements**:  
+- **REQ-5**: Users can browse a list of upcoming movies and events.
+- **REQ-6**: Users can select showtimes and view available seats.
+- **REQ-7**: Users can book tickets and receive a confirmation via email/SMS.
+- **REQ-8**: Admins can view and manage bookings for each event.
 
-### 4.5 System Feature 5: User Account Management  
-- Users can register for an account or log in via social media (Google/Facebook).  
-- The account page will display personal details, booking history, and payment methods.
+### 4.3 Payment Gateway Integration  
+**Description and Priority**:  
+Users must be able to pay for tickets securely via integrated third-party payment gateways. **Priority: High**.
 
-## 5. Nonfunctional Requirements
+**Functional Requirements**:  
+- **REQ-9**: Users can pay for tickets using credit/debit cards, PayPal, or other payment methods.
+- **REQ-10**: Payments must be processed securely, and sensitive data should be encrypted.
+- **REQ-11**: Users will receive a payment receipt after successful payment.
+
+### 4.4 Event Management  
+**Description and Priority**:  
+Admins should be able to create, modify, and delete events, as well as manage movie schedules and seat availability. **Priority: Medium**.
+
+**Functional Requirements**:  
+- **REQ-12**: Admins can create new events and set showtimes.
+- **REQ-13**: Admins can edit event details, including date, time, and ticket pricing.
+- **REQ-14**: Admins can manage seat availability for each showtime.
+
+---
+
+## 5. Other Nonfunctional Requirements
 
 ### 5.1 Performance Requirements  
-- The system should handle up to 500,000 users concurrently.  
-- Page load times should not exceed 2 seconds during normal traffic.
+- The system should be able to handle **100 concurrent users** without degradation in performance.
 
-### 5.2 Usability and Accessibility  
-- The platform should be intuitive and user-friendly across all devices (desktop, mobile, tablet).  
-- The system should follow accessibility standards, including screen reader support.
+### 5.2 Safety Requirements  
+- **REQ-15**: System backups will occur every 24 hours to ensure data is not lost.
 
 ### 5.3 Security Requirements  
-- **Two-Factor Authentication (2FA):** Required for logging in as an event organizer or admin.  
-- **SSL Certification:** To ensure all communication between users and servers is secure.
-- **Data Encryption:** Sensitive user data must be encrypted at rest and in transit.
+- **REQ
+
+-16**: All user data (including passwords and payment details) will be encrypted using **AES-256** encryption.
+- **REQ-17**: Implement **2-factor authentication (2FA)** for admin access.
 
 ### 5.4 Software Quality Attributes  
-- **Availability:** 99.9% uptime is required to avoid service interruptions during high-traffic events.  
-- **Scalability:** The system must handle increasing loads seamlessly as user traffic grows.
+- **Scalability**: The system should scale to handle an increasing number of users and events.
+- **Usability**: The platform must be easy to use with a responsive design for all devices.
 
 ### 5.5 Business Rules  
-- Users must agree to the terms and conditions before completing a booking.  
-- Refunds will depend on event-specific policies set by the organizers.
-  
-### 6. System Architecture
-The system follows a three-tier architecture:  
-1. **Frontend:** Built with React.js or Vue.js for the user interface.  
-2. **Backend:** Using Node.js and Express for handling business logic and data processing.  
-3. **Database:** A NoSQL database like MongoDB to manage user information, event data, and bookings.
+- **REQ-18**: Tickets cannot be refunded after purchase.
+- **REQ-19**: Admins can provide promo codes for discounts.
+
+---
+
+## 6. Other Requirements
+
+- The system must be deployed and tested on a staging server before production deployment.
+- All code should be documented for maintainability.
+
+---  
