@@ -111,8 +111,438 @@ The **BookMyShow Clone** employs a distributed, microservices-based architecture
 - Dashboards for tracking **ticket sales** and revenue.
 - Tools for **event setup** and **seat management**.
 - Analytics for **audience demographics** and preferences.
+---
+
+## 4. Module Design
+
+### 4.1 Frontend Architecture
+
+```plantuml
+@startuml
+!theme plain
+title BookMyShow Clone - Frontend Architecture
+
+package "Frontend Application" {
+    ' Core Architecture Layers
+    package "Presentation Layer" {
+        [Pages/Views] as Pages
+        [Components] as Components
+        [Layouts] as Layouts
+    }
+
+    package "State Management" {
+        [Redux Store] as ReduxStore
+        [Action Creators] as Actions
+        [Reducers] as Reducers
+        
+        folder "Slices" {
+            [User Slice] as UserSlice
+            [Event Slice] as EventSlice
+            [Booking Slice] as BookingSlice
+        }
+    }
+
+    package "Services Layer" {
+        [Authentication Service] as AuthService
+        [Event Service] as EventService
+        [Booking Service] as BookingService
+        [Payment Service] as PaymentService
+    }
+
+    package "Routing" {
+        [React Router] as Router
+        [Route Configuration] as RouteConfig
+    }
+
+    package "Utilities" {
+        [API Interceptor] as APIInterceptor
+        [Error Handling] as ErrorHandler
+        [Authentication Middleware] as AuthMiddleware
+    }
+
+    package "UI Kit & Styling" {
+        [Tailwind CSS] as Styling
+        [Custom Components] as UIComponents
+    }
+
+    package "Performance Optimization" {
+        [Code Splitting] as CodeSplit
+        [Lazy Loading] as LazyLoad
+        [Memoization] as Memoization
+    }
+}
+
+package "External Integrations" {
+    [Google OAuth] as OAuth
+    [Analytics] as Analytics
+    [Payment Gateway] as PaymentGateway
+}
+
+' Relationship Connections
+Pages -down-> Router
+Pages -down-> Components
+Pages -down-> ReduxStore
+
+Components -down-> UIComponents
+Components -down-> Styling
+
+ReduxStore -down-> Actions
+ReduxStore -down-> Reducers
+
+Actions -down-> Services
+Reducers -down-> Services
+
+Services -down-> APIInterceptor
+Services -down-> AuthMiddleware
+
+Router -down-> RouteConfig
+Router -down-> LazyLoad
+
+APIInterceptor -down-> OAuth
+APIInterceptor -down-> ErrorHandler
+
+' Performance Optimization Connections
+Pages -down-> CodeSplit
+Components -down-> Memoization
+
+' External Integration Connections
+Pages -down-> Analytics
+Services -down-> PaymentGateway
+
+note right of "Frontend Application"
+    Technology Stack:
+    - React 18
+    - Redux Toolkit
+    - React Router
+    - TypeScript
+    - Tailwind CSS
+    Responsive and Performant Design
+end note
+@enduml
+```
+---
+### 4.1.1 Architectural Overview
+- **Modular Component-Based Design**: Utilizing React/Next.js for scalable frontend architecture  
+- **Responsive Design**: Adaptive layout for web and mobile platforms  
+- **State Management**: Implementing Redux/Context API for global state management  
+- **Performance Optimization**: Code splitting, lazy loading, and efficient rendering .
+--- 
+### 4.1.2 User Interface Modules
+
+#### 1. Authentication Module
+- Login/Registration interfaces  
+- Social media authentication  
+- Password recovery workflows  
+- Multi-factor authentication support  
+
+#### 2. Content Discovery Module
+- Personalized recommendation grid  
+- Trending and categorized content sections  
+- Advanced search and filtering mechanisms  
+- Content carousel and horizontal scrolling views  
+
+#### 3. Video Interaction Module
+- Adaptive video player  
+- Interactive engagement tools (likes, comments, shares)  
+- Fullscreen and Picture-in-Picture modes  
+- Quality and playback speed controls  
+
+#### 4. User Profile Module
+- Comprehensive profile management  
+- Content upload capabilities  
+- Watch history and saved playlists  
+- Channel customization options
+---
+### 4.1.3 Client-Side Processing
+- **Local Caching**: Implementing browser storage for performance  
+- **Offline Support**: Service worker integration  
+- **Real-time Updates**: WebSocket connections for live interactions  
+- **Error Boundary Management**: Graceful error handling and user notifications  
 
 ---
+
+## 4.2 Backend System Architecture
+
+![System Architecture](Backend_arch_spotify.png)
+
+```plantuml
+@startuml
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Argonaut-B04/PlantUML-style-C4/master/style.puml
+
+title Spotify Clone - Backend System Architecture
+
+frame "Frontend Layer" {
+    [Web Client] as WebClient
+    [Mobile Client] as MobileClient
+}
+
+cloud "API Gateway" {
+    [Nginx / Kong API Gateway] as APIGateway
+}
+
+frame "Authentication Services" {
+    [Authentication Service] as AuthService
+    database "User Database" {
+        [MongoDB - User Profiles] as UserDB
+    }
+}
+
+frame "Music Processing Microservices" {
+    [Music Upload Service] as UploadService
+    [Music Encoding Service] as EncodingService
+    [Thumbnail Generation Service] as ArtworkService
+    
+    database "Music Metadata DB" {
+        [PostgreSQL - Music Metadata] as MusicMetadataDB
+    }
+    
+    storage "Music Storage" {
+        [Distributed File Storage] as MusicStorage
+    }
+}
+
+frame "Content Delivery" {
+    [CDN Service] as CDN
+}
+
+frame "Content Services" {
+    [Music Recommendation Service] as RecommendationService
+    [Search Service] as SearchService
+    [Analytics Service] as AnalyticsService
+    
+    database "Redis Caches" {
+        [Playlist Cache] as PlaylistCache
+        [Recommendation Cache] as RecommendCache
+    }
+    
+    database "Elasticsearch" {
+        [Music Search Index] as SearchIndex
+    }
+}
+
+frame "Social Interaction Services" {
+    [Like/Share Service] as LikeShareService
+    [Playlist Interaction Service] as PlaylistService
+    database "Interaction Database" {
+        [Cassandra - Likes/Comments] as InteractionDB
+    }
+}
+
+frame "Monetization Services" {
+    [Monetization Service] as MonetizationService
+    database "Billing Database" {
+        [PostgreSQL - Earnings] as BillingDB
+    }
+}
+
+frame "Message Queues & Event Streaming" {
+    [Apache Kafka] as EventBus
+    [RabbitMQ] as MessageQueue
+}
+
+frame "Monitoring & Observability" {
+    [Prometheus] as Monitoring
+    [Grafana] as Dashboard
+    [ELK Stack] as Logging
+}
+
+' Connections
+WebClient --> APIGateway
+MobileClient --> APIGateway
+
+APIGateway --> AuthService : Authentication
+APIGateway --> UploadService : Music Upload
+APIGateway --> LikeShareService : Likes/Share
+APIGateway --> PlaylistService : Playlist Management
+
+AuthService --> UserDB : Store/Retrieve Users
+AuthService --> EventBus : User Events
+
+UploadService --> MusicStorage : Store Music
+UploadService --> EncodingService : Trigger Encoding
+UploadService --> MusicMetadataDB : Store Metadata
+UploadService --> EventBus : Upload Events
+
+EncodingService --> ArtworkService : Generate Artwork
+EncodingService --> MusicStorage : Store Processed Music
+EncodingService --> EventBus : Encoding Events
+
+RecommendationService --> SearchIndex
+RecommendationService --> RecommendCache
+RecommendationService --> EventBus : Recommendation Events
+
+LikeShareService --> InteractionDB : Store Likes/Comments
+LikeShareService --> EventBus : Like Events
+
+PlaylistService --> PlaylistCache : Update Playlist
+PlaylistService --> EventBus : Playlist Events
+
+CDN --> MusicStorage : Distribute Content
+
+SearchService --> SearchIndex : Update/Query Search
+SearchService --> EventBus : Search Events
+
+AnalyticsService --> EventBus : Consume Events
+AnalyticsService --> Monitoring : Report Metrics
+
+MonetizationService --> BillingDB : Track Earnings
+MonetizationService --> EventBus : Monetization Events
+
+EventBus <--> MessageQueue : Event Routing
+
+Monitoring --> Logging : Collect Logs
+Monitoring --> Dashboard : Visualize Metrics
+
+@enduml
+```
+# BookMyShow Clone System Design
+
+---
+
+## 4.2.1 Distributed Service Ecosystem
+- **Microservices Architecture**: Independently scalable services  
+- **Event-Driven Communication**: Kafka/RabbitMQ for inter-service messaging  
+- **Service Discovery**: Consul/Kubernetes for dynamic service registration  
+
+---
+
+## 4.2.2 Authentication and Security Layer
+
+### 1. Identity Management
+- JWT-based authentication  
+- Role-based access control  
+- OAuth 2.0 and OpenID Connect support  
+- Passwordless authentication options  
+
+### 2. Security Mechanisms
+- Encrypted token storage  
+- Brute-force protection  
+- Cross-Site Scripting (XSS) prevention  
+- SQL injection safeguards  
+
+---
+
+## 4.2.3 Content Management Services
+
+### 1. Event Processing Service
+- Event transcoding and metadata extraction  
+- Adaptive bitrate streaming  
+- Event artwork (poster) generation  
+- Metadata extraction for events  
+- Content moderation  
+
+### 2. Storage Management
+- Distributed file storage (AWS S3/Google Cloud Storage)  
+- Content Delivery Network (CDN) integration  
+- Efficient storage tiering  
+- Backup and disaster recovery  
+
+---
+
+## 4.2.4 Recommendation and Discovery Engine
+
+### 1. Machine Learning Models
+- Collaborative filtering  
+- Content-based recommendation  
+- Hybrid recommendation algorithms  
+- User behavior analysis  
+
+### 2. Personalization Mechanisms
+- Real-time preference tracking  
+- Contextual recommendation  
+- A/B testing recommendation strategies  
+- Diversity and serendipity in suggestions  
+
+---
+
+## 4.2.5 Interaction and Engagement Services
+
+### 1. User Interaction Tracking
+- Like, comment, and share mechanisms  
+- Notification dispatch system  
+- Engagement metrics collection  
+- Community interaction workflows  
+
+### 2. Social Features
+- Follow/subscribe functionality  
+- User-generated playlists  
+- Community content curation  
+- Collaborative experiences for users  
+
+---
+
+## 4.3 Cross-Cutting Concerns
+
+### 4.3.1 Observability and Monitoring
+- Distributed tracing  
+- Performance metrics collection  
+- Log aggregation  
+- Real-time alerting systems  
+
+### 4.3.2 Scalability Strategies
+- Horizontal service scaling  
+- Load balancing  
+- Caching mechanisms  
+- Auto-scaling configuration  
+
+### 4.3.3 Compliance and Privacy
+- GDPR compliance  
+- Data anonymization  
+- User consent management  
+- Transparent data handling  
+
+---
+
+## 4.4 Advertising Ecosystem
+
+### 4.4.1 Ad Targeting Strategy
+- Demographic-based targeting  
+- Interest and behavior profiling  
+- Geographic location targeting  
+- Device-specific ad delivery  
+
+### 4.4.2 Ad Placement Types
+
+#### 1. Video Ad Formats
+- Pre-roll ads  
+- Mid-roll ads  
+- Post-roll ads  
+- Overlay advertisements  
+
+#### 2. Additional Placement Channels
+- Sidebar recommendations  
+- Banner advertisements  
+- Sponsored content sections  
+
+### 4.4.3 Revenue Generation
+- Impression-based pricing (CPM)  
+- Performance-based pricing (CPC)  
+- Revenue sharing with content creators  
+- Conversion tracking  
+
+### 4.4.4 Compliance and User Experience
+- User ad preference settings  
+- Opt-out mechanisms  
+- Ad frequency capping  
+- Content moderation  
+- Brand safety filters  
+
+### 4.4.5 Technical Infrastructure
+- Low-latency ad delivery  
+- Real-time bidding integration  
+- Fraud detection mechanisms  
+- Cross-platform ad compatibility  
+
+### 4.4.6 Advertiser Tools
+- Self-service ad creation platform  
+- Campaign management dashboard  
+- Performance analytics  
+- A/B testing capabilities  
+
+
+
+
 ## 7. Non-Functional Requirements
 
 ### 7.1 Performance
