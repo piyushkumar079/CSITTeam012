@@ -1,0 +1,86 @@
+@startuml
+
+' Colors for components and packages
+skinparam component {
+    BackgroundColor<<frontend>> LightSkyBlue
+    BackgroundColor<<backend>> LightSteelBlue
+    BackgroundColor<<microservice>> LightGoldenrodYellow
+    BackgroundColor<<database>> LightGreen
+    BackgroundColor<<queue>> Moccasin
+    BackgroundColor<<external>> Lavender
+}
+
+' External Users
+actor "User (Customer)" as User
+actor "Admin" as Admin
+actor "Event Organizer" as EventOrganizer
+
+' System Boundary: BookMyShow Clone
+package "BookMyShow Clone System" {
+
+    ' Web Application
+    rectangle "Web Application" as WebApp <<backend>> {
+        component "Frontend (React)" as WebFrontend <<frontend>>
+        component "Backend (Spring Boot)" as WebBackend <<backend>>
+    }
+
+    ' Mobile Application
+    rectangle "Mobile App" as MobileApp <<backend>> {
+        component "Mobile Frontend (Flutter)" as MobileFrontend <<frontend>>
+        component "Mobile Backend (API Gateway)" as MobileBackend <<backend>>
+    }
+
+    ' Microservices
+    package "Microservices" <<microservice>> {
+        component "Authentication Service" as AuthService <<microservice>>
+        component "Event Management Service" as EventService <<microservice>>
+        component "Seat Management Service" as SeatService <<microservice>>
+        component "Payment Service" as PaymentService <<microservice>>
+        component "Notification Service" as NotificationService <<microservice>>
+    }
+
+    ' Data Storage
+    database "Relational Database (MySQL)" as RelationalDB <<database>>
+    database "NoSQL Database (MongoDB)" as NoSQLDB <<database>>
+    queue "Message Queue (RabbitMQ)" as MessageQueue <<queue>>
+}
+
+' External Services
+package "External Services" <<external>> {
+    rectangle "Payment Gateway" as PaymentGateway <<external>>
+    rectangle "Email/SMS Service" as EmailService <<external>>
+}
+
+' Relationships and Data Flow
+User --> WebFrontend : "Access Website"
+User --> MobileFrontend : "Use Mobile App"
+WebFrontend --> WebBackend : "API Calls"
+MobileFrontend --> MobileBackend : "API Calls"
+
+WebBackend --> AuthService : "Login/Signup"
+MobileBackend --> AuthService : "Login/Signup"
+
+WebBackend --> EventService : "Browse Events"
+MobileBackend --> EventService : "Browse Events"
+
+WebBackend --> SeatService : "Book/Cancel Tickets"
+MobileBackend --> SeatService : "Book/Cancel Tickets"
+
+WebBackend --> PaymentService : "Process Payment"
+MobileBackend --> PaymentService : "Process Payment"
+
+PaymentService --> PaymentGateway : "Secure Transactions"
+
+NotificationService --> EmailService : "Send Notifications"
+WebBackend --> NotificationService : "Notify Users"
+MobileBackend --> NotificationService : "Notify Users"
+
+EventService --> RelationalDB : "Store Event Data"
+SeatService --> RelationalDB : "Update Seat Availability"
+AuthService --> NoSQLDB : "Manage User Sessions"
+NotificationService --> MessageQueue : "Queue Notifications"
+
+Admin --> WebFrontend : "Manage Platform"
+EventOrganizer --> WebFrontend : "Submit Events"
+
+@enduml
