@@ -1,0 +1,78 @@
+@startuml
+
+skinparam component {
+    BackgroundColor<<server>> LightSkyBlue
+    BackgroundColor<<db>> LightGreen
+    BackgroundColor<<service>> LightGoldenrodYellow
+    BackgroundColor<<client>> Lavender
+    BackgroundColor<<external>> Moccasin
+}
+
+' External Actors
+actor "User" as User
+actor "Admin" as Admin
+actor "Event Organizer" as Organizer
+
+' Client Devices
+node "Client Devices" <<client>> {
+    component "Web Frontend" as WebBrowser
+    component "Mobile Frontend" as MobileApp
+}
+
+' Load Balancer
+node "Load Balancer" <<server>> {
+    component "HTTP Routing" as HTTPRouting
+}
+
+' Application Servers
+node "Application Server Cluster" <<server>> {
+    component "Web Backend" as WebBackend
+    component "Mobile Backend" as MobileBackend
+    node "Microservices Server" <<server>> {
+        component "Authentication Service" as AuthService
+        component "Event Service" as EventService
+        component "Seat Management Service" as SeatService
+        component "Payment Service" as PaymentService
+        component "Notification Service" as NotificationService
+    }
+}
+
+' Databases
+node "Database Cluster" <<db>> {
+    database "Relational DB (MySQL)" as RelationalDB <<db>>
+    database "NoSQL DB (MongoDB)" as NoSQLDB <<db>>
+}
+
+' External Services
+node "External Services" <<external>> {
+    component "Payment Gateway" as PaymentGateway
+    component "Email/SMS Service" as EmailService
+}
+
+' Relationships
+User --> WebBrowser : "Access Website"
+User --> MobileApp : "Use Mobile App"
+Admin --> WebBrowser : "Manage Events/Users"
+Organizer --> WebBrowser : "Create Events"
+
+WebBrowser --> HTTPRouting : "API Requests"
+MobileApp --> HTTPRouting : "API Requests"
+
+HTTPRouting --> WebBackend : "Route to Web Backend"
+HTTPRouting --> MobileBackend : "Route to Mobile Backend"
+
+WebBackend --> AuthService : "Authenticate User"
+WebBackend --> EventService : "Manage Events"
+WebBackend --> PaymentService : "Initiate Payment"
+
+MobileBackend --> AuthService : "Authenticate User"
+MobileBackend --> EventService : "Manage Events"
+MobileBackend --> PaymentService : "Initiate Payment"
+
+AuthService --> RelationalDB : "User Data Queries"
+EventService --> RelationalDB : "Event Data Queries"
+SeatService --> RelationalDB : "Booking Data Queries"
+PaymentService --> PaymentGateway : "Process Payments"
+NotificationService --> EmailService : "Send Notifications"
+
+@enduml
