@@ -1,0 +1,50 @@
+@startuml
+
+' External Actors
+actor "User (Customer)" as User
+actor "Admin" as Admin
+actor "Event Organizers" as EventOrganizer
+
+' External Systems
+rectangle "Payment Gateway" as PaymentGateway
+rectangle "Email/SMS Notification Service" as NotificationService
+database "Database Server" as Database
+
+' System Boundary: BookMyShow Clone
+package "BookMyShow Clone Application" {
+
+    ' Subsystems
+    rectangle "User Registration \nand Authentication" as Registration
+    rectangle "Event Browsing \nand Discovery" as EventBrowsing
+    rectangle "Seat Booking \nand Availability" as SeatBooking
+    rectangle "Payment Processing" as PaymentProcessing
+    rectangle "Admin Panel" as AdminPanel
+    rectangle "Notifications \nand Alerts" as Notifications
+    rectangle "Event Management" as EventManagement
+    rectangle "User Profile Management" as UserProfile
+}
+
+' Relationships between actors and system components
+User --> Registration : Sign Up/Login
+User --> EventBrowsing : Browse Events
+User --> SeatBooking : Book Tickets
+User --> PaymentProcessing : Pay for Tickets
+User --> Notifications : Receive Notifications
+User --> UserProfile : Update Profile
+
+Admin --> AdminPanel : Manage Users, Events, and Bookings
+Admin --> EventManagement : Create/Modify/Delete Events
+Admin --> Notifications : Send Promotional Notifications
+
+EventOrganizer --> EventManagement : Submit/Update Event Details
+
+' External System Interactions
+EventManagement --> Database : Store Event Information
+SeatBooking --> Database : Update Seat Availability
+Registration --> Database : Manage User Accounts
+UserProfile --> Database : Retrieve/Update User Data
+
+PaymentProcessing --> PaymentGateway : Process Transactions
+Notifications --> NotificationService : Send Emails/SMS
+
+@enduml
