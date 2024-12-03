@@ -1,0 +1,137 @@
+@startuml
+
+skinparam component {
+    BackgroundColor<<frontend>> LightSkyBlue
+    BackgroundColor<<backend>> LightSteelBlue
+    BackgroundColor<<service>> LightGoldenrodYellow
+    BackgroundColor<<database>> LightGreen
+    BackgroundColor<<external>> Lavender
+    BackgroundColor<<queue>> Moccasin
+}
+
+' External Users
+actor "User (Customer)" as User
+actor "Admin" as Admin
+actor "Event Organizer" as Organizer
+
+' Web Application Components
+package "Web Application" {
+    component "Web Frontend" as WebFrontend <<frontend>> {
+        [Home Page]
+        [Event Search]
+        [User Dashboard]
+        [Ticket Booking]
+    }
+    component "Web Backend" as WebBackend <<backend>> {
+        [API Controller]
+        [Authentication Module]
+        [Event Management Module]
+        [Payment Processing Module]
+        [Notification Module]
+    }
+}
+
+' Mobile Application Components
+package "Mobile Application" {
+    component "Mobile Frontend" as MobileFrontend <<frontend>> {
+        [Home Screen]
+        [Event List]
+        [Booking Confirmation]
+        [User Profile]
+    }
+    component "Mobile Backend" as MobileBackend <<backend>> {
+        [API Gateway]
+        [Authentication Handler]
+        [Event Handler]
+        [Payment Handler]
+        [Notification Sender]
+    }
+}
+
+' Microservices
+package "Microservices" <<service>> {
+    component "Authentication Service" as AuthService <<service>> {
+        [User Registration]
+        [Session Management]
+        [Password Recovery]
+    }
+    component "Event Service" as EventService <<service>> {
+        [Event Creation]
+        [Event Listing]
+        [Event Search]
+    }
+    component "Seat Management Service" as SeatService <<service>> {
+        [Seat Allocation]
+        [Seat Availability]
+        [Seat Cancellation]
+    }
+    component "Payment Service" as PaymentService <<service>> {
+        [Payment Processing]
+        [Transaction Logs]
+        [Refunds]
+    }
+    component "Notification Service" as NotificationService <<service>> {
+        [Email Notifications]
+        [SMS Alerts]
+        [Push Notifications]
+    }
+}
+
+' Databases
+database "Relational Database (MySQL)" as RelationalDB <<database>> {
+    [User Data]
+    [Event Data]
+    [Booking Data]
+}
+database "NoSQL Database (MongoDB)" as NoSQLDB <<database>> {
+    [Session Data]
+}
+queue "Message Queue (RabbitMQ)" as MessageQueue <<queue>> {
+    [Notification Jobs]
+}
+
+' External Systems
+package "External Services" <<external>> {
+    component "Payment Gateway" as PaymentGateway <<external>> {
+        [Transaction API]
+    }
+    component "Email/SMS Service" as EmailService <<external>> {
+        [Send Emails]
+        [Send SMS]
+    }
+}
+
+' Relationships between components
+User --> WebFrontend : "Access Website"
+User --> MobileFrontend : "Use Mobile App"
+Admin --> WebFrontend : "Manage Events/Users"
+Organizer --> WebFrontend : "Add Events"
+
+WebFrontend --> WebBackend : "REST API Calls"
+MobileFrontend --> MobileBackend : "API Requests"
+
+WebBackend --> AuthService : "Authenticate User"
+MobileBackend --> AuthService : "Authenticate User"
+
+WebBackend --> EventService : "Event Management"
+MobileBackend --> EventService : "Event Management"
+
+WebBackend --> SeatService : "Seat Operations"
+MobileBackend --> SeatService : "Seat Operations"
+
+WebBackend --> PaymentService : "Initiate Payments"
+MobileBackend --> PaymentService : "Initiate Payments"
+
+WebBackend --> NotificationService : "Trigger Notifications"
+MobileBackend --> NotificationService : "Trigger Notifications"
+
+PaymentService --> PaymentGateway : "Process Payments"
+NotificationService --> EmailService : "Send Notifications"
+
+AuthService --> RelationalDB : "Store User Info"
+EventService --> RelationalDB : "Event Details"
+SeatService --> RelationalDB : "Booking Info"
+AuthService --> NoSQLDB : "Manage Sessions"
+NotificationService --> MessageQueue : "Queue Notifications"
+
+@enduml
