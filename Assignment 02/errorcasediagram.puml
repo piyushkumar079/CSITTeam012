@@ -1,0 +1,32 @@
+@startuml
+
+actor "User" as User
+actor "Theater Manager" as Manager
+
+rectangle "BookMyShow Platform" as System {
+    usecase "Booking Error" as UC_BookingError
+    usecase "Payment Failure" as UC_PaymentFailure
+    usecase "Incorrect Seat Allocation" as UC_SeatAllocationError
+    usecase "Show Cancellation" as UC_ShowCancellation
+    usecase "Server Downtime" as UC_ServerDowntime
+    usecase "Data Sync Issues" as UC_DataSyncIssues
+    usecase "Account Login Failure" as UC_LoginFailure
+    usecase "Invalid Discount Code" as UC_InvalidDiscountCode
+}
+
+User --> UC_BookingError : Encounters
+User --> UC_PaymentFailure : Encounters
+User --> UC_SeatAllocationError : Affected by
+User --> UC_LoginFailure : Affected by
+User --> UC_InvalidDiscountCode : Encounters
+
+Manager --> UC_ShowCancellation : Notifies
+Manager --> UC_DataSyncIssues : Encounters
+
+UC_BookingError ..> UC_PaymentFailure : "May result from"
+UC_BookingError ..> UC_SeatAllocationError : "Leads to"
+UC_ServerDowntime ..> UC_BookingError : "Causes"
+UC_ServerDowntime ..> UC_LoginFailure : "Causes"
+UC_DataSyncIssues ..> UC_SeatAllocationError : "Results in"
+
+@enduml
