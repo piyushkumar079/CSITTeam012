@@ -655,6 +655,131 @@ Admin --> PlatformSettings
 @enduml
 ```
 ---
+## 6. Interface Design
+
+![Interface design](https://github.com/user-attachments/assets/c4d695df-979d-4f2b-bf92-da219792d006)
+
+```plantuml
+@startuml
+skinparam linetype polyline
+title BookMyShow - Interface Design
+
+rectangle "Authentication Screens" {
+    (Login Screen) as Login
+    (Registration Screen) as Register
+    (Password Reset) as PasswordReset
+}
+
+rectangle "Main Application Screens" {
+    (Home/Feed Screen) as Home
+    (Event Details Screen) as EventDetails
+    (Search Results) as Search
+    (Booking Screen) as Booking
+    (Payment Screen) as Payment
+    (Trending Screen) as Trending
+    (Subscriptions Screen) as Subscriptions
+}
+
+rectangle "Event Organizer Screens" {
+    (Event Creation) as EventCreate
+    (Event Management) as EventManage
+    (Event Customization) as EventCustom
+    (Analytics Dashboard) as Analytics
+    (Monetization) as Monetization
+}
+
+rectangle "User Profile Screens" {
+    (User Profile) as Profile
+    (Booking History) as History
+    (Subscription Plans) as Subscriptions
+}
+
+rectangle "Navigation Components" {
+    (Sidebar) as Sidebar
+    (Top Navigation Bar) as TopNav
+    (Search Bar) as SearchBar
+    (Mobile Navigation) as MobileNav
+}
+
+rectangle "UI Components" {
+    (Event Thumbnail) as Thumbnail
+    (Follow Button) as FollowButton
+    (Interaction Controls) as InteractControls
+    (Comment Section) as Comments
+    (Recommended Events) as Recommendations
+}
+
+' Navigation Flows
+Login --> Home
+Register --> Home
+Home --> EventDetails
+EventDetails --> Booking
+SearchBar --> Search
+Sidebar --> Home
+Sidebar --> Subscriptions
+Sidebar --> Trending
+EventCreate --> EventManage
+EventCreate --> EventCustom
+
+note right of "UI Components"
+    Design Principles:
+    - Responsive Design
+    - Mobile-First Approach
+    - Consistent UI/UX
+    - Accessibility
+    - Performance Optimized
+
+    Breakpoints:
+    - Mobile: <600px
+    - Tablet: 600-1024px
+    - Desktop: >1024px
+end note
+@enduml
+```
+---
+## 6.2 External System Interfaces
+- **CDN**: Delivers event media (posters, trailers) to users efficiently.  
+- **Analytics Tools**: Tracks user interactions with events and performance metrics.  
+- **Search Engine**: Provides fast and accurate event search results.  
+
+---
+
+## 6.3 Notification Flow Diagram
+This diagram represents the flow of notifications for events like new comments or event updates.
+
+```plantuml
+@startuml
+title Notification Flow for BookMyShow Clone
+
+actor "User" as User
+actor "System" as System
+actor "Event Organizer" as Organizer
+
+rectangle "Notification Service" {
+    (New Event Update) as EventUpdate
+    (Booking Confirmation) as BookingConfirmation
+    (Comment Notification) as CommentNotification
+    (Ticket Cancellation) as TicketCancellation
+}
+
+' Relationships
+User --> EventUpdate : Receive Event Notifications
+User --> BookingConfirmation : Receive Confirmation
+User --> CommentNotification : Receive Comment Alerts
+User --> TicketCancellation : Receive Cancellation Alerts
+
+Organizer --> EventUpdate : Notify of Updates
+Organizer --> CommentNotification : Notify Comments on Event
+
+System --> EventUpdate : Trigger Event Notifications
+System --> BookingConfirmation : Trigger Booking Confirmations
+System --> CommentNotification : Trigger Comment Alerts
+System --> TicketCancellation : Trigger Cancellation Alerts
+
+@enduml
+```
+---
+
 ## 7. Non-Functional Requirements
 
 ### 7.1 Performance
