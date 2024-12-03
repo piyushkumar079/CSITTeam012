@@ -3,6 +3,9 @@
 actor "Competitor Ticket Seller" as Competitor
 actor "Independent Theater" as Theater
 actor "Consumer" as Consumer
+actor User
+actor Hacker
+actor Admin
 
 rectangle "BookMyShow Platform" as System {
     usecase "Force Exclusive Contracts" as UC_ExclusiveContracts
@@ -10,6 +13,12 @@ rectangle "BookMyShow Platform" as System {
     usecase "Manipulate Ticket Availability" as UC_TicketManipulation
     usecase "Impose Unfair Terms on Small Theaters" as UC_UnfairTerms
     usecase "Engage in Predatory Pricing" as UC_PredatoryPricing
+    usecase "Book Cinema/Show/Event Tickets" as UC_BookTickets
+    usecase "Create Fake Accounts" as UC_FakeAccounts
+    usecase "Perform Unauthorized Actions" as UC_UnauthorizedActions
+    usecase "Data Theft" as UC_DataTheft
+    usecase "Monitor System Logs" as UC_MonitorLogs
+    usecase "Block Abusive Users" as UC_BlockUsers
 }
 
 Competitor --> UC_ExclusiveContracts : Affected
@@ -23,8 +32,19 @@ Consumer --> UC_HighFees : Impacted
 Consumer --> UC_TicketManipulation : Impacted
 Consumer --> UC_PredatoryPricing : Harmed
 
+User --> UC_BookTickets
+Hacker --> UC_FakeAccounts
+Hacker --> UC_UnauthorizedActions
+Hacker --> UC_DataTheft
+Admin --> UC_MonitorLogs
+Admin --> UC_BlockUsers
+
 UC_ExclusiveContracts ..> UC_TicketManipulation : "Enables"
 UC_TicketManipulation ..> UC_PredatoryPricing : "Supports"
 UC_UnfairTerms ..> UC_HighFees : "Results in"
+
+UC_FakeAccounts ..> UC_UnauthorizedActions : "Leads to"
+UC_UnauthorizedActions ..> UC_DataTheft : "May result in"
+UC_MonitorLogs ..> UC_BlockUsers : "Triggers"
 
 @enduml
