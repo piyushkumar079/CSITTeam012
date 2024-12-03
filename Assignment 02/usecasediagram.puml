@@ -1,0 +1,37 @@
+@startuml
+
+actor "User" as User
+actor "Theater Manager" as Manager
+actor "Admin" as Admin
+
+rectangle "BookMyShow Platform" as System {
+    usecase "Search for Shows/Events" as UC_SearchShows
+    usecase "Book Tickets" as UC_BookTickets
+    usecase "Make Payment" as UC_MakePayment
+    usecase "Cancel Booking" as UC_CancelBooking
+    usecase "Provide Reviews/Feedback" as UC_Reviews
+    usecase "Manage Theaters and Shows" as UC_ManageTheaters
+    usecase "View Sales Reports" as UC_SalesReports
+    usecase "Monitor System Performance" as UC_MonitorSystem
+    usecase "Apply Discounts or Offers" as UC_ApplyDiscounts
+    usecase "Resolve Customer Queries" as UC_ResolveQueries
+}
+
+User --> UC_SearchShows
+User --> UC_BookTickets
+User --> UC_MakePayment
+User --> UC_CancelBooking
+User --> UC_Reviews
+User --> UC_ApplyDiscounts
+
+Manager --> UC_ManageTheaters
+Manager --> UC_SalesReports
+
+Admin --> UC_MonitorSystem
+Admin --> UC_ResolveQueries
+
+UC_BookTickets <. UC_ApplyDiscounts : "Optional Step"
+UC_MakePayment <. UC_BookTickets : "Includes"
+UC_CancelBooking <. UC_BookTickets : "Extends"
+
+@enduml
