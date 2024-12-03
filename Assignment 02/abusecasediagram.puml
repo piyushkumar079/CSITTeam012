@@ -1,0 +1,30 @@
+@startuml
+
+actor "Competitor Ticket Seller" as Competitor
+actor "Independent Theater" as Theater
+actor "Consumer" as Consumer
+
+rectangle "BookMyShow Platform" as System {
+    usecase "Force Exclusive Contracts" as UC_ExclusiveContracts
+    usecase "Charge Excessive Convenience Fees" as UC_HighFees
+    usecase "Manipulate Ticket Availability" as UC_TicketManipulation
+    usecase "Impose Unfair Terms on Small Theaters" as UC_UnfairTerms
+    usecase "Engage in Predatory Pricing" as UC_PredatoryPricing
+}
+
+Competitor --> UC_ExclusiveContracts : Affected
+Competitor --> UC_TicketManipulation : Affected
+Competitor --> UC_PredatoryPricing : Affected
+
+Theater --> UC_ExclusiveContracts : Pressured
+Theater --> UC_UnfairTerms : Pressured
+
+Consumer --> UC_HighFees : Impacted
+Consumer --> UC_TicketManipulation : Impacted
+Consumer --> UC_PredatoryPricing : Harmed
+
+UC_ExclusiveContracts ..> UC_TicketManipulation : "Enables"
+UC_TicketManipulation ..> UC_PredatoryPricing : "Supports"
+UC_UnfairTerms ..> UC_HighFees : "Results in"
+
+@enduml
