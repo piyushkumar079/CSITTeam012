@@ -538,11 +538,81 @@ Monitoring --> Dashboard : Visualize Metrics
 - Self-service ad creation platform  
 - Campaign management dashboard  
 - Performance analytics  
-- A/B testing capabilities  
+- A/B testing capabilities
+---
+## 5. Database Design
 
+The BookMyShow clone uses a combination of SQL and NoSQL databases. Below is the schema for major entities:
 
+- **Users**: Stores user information like username, email, and preferences.
+- **Events**: Stores event details, such as name, date, venue, and ticket availability.
+- **Bookings**: Stores booking information, including seat selection and payment status.
+- **Playlists**: Stores playlist information, including user-created playlists and shared playlists.
+- **Comments**: Stores user comments and feedback for events and movies.
+- **Interactions**: Tracks likes, views, and shares related to events and movies.
+- **Subscriptions**: Tracks user subscriptions to events or premium features.
 
+![Database Design](./bookmyshow_database_design.png)
 
+```plantuml
+@startuml
+!define DARKBLUE
+!includeurl https://raw.githubusercontent.com/Argonaut-B04/PlantUML-style-C4/master/style.puml
+// Event Interaction Use Cases
+usecase "Browse Events" as BrowseEvents
+usecase "Book Ticket" as BookTicket
+usecase "Leave Feedback" as LeaveFeedback
+
+// Playlist Interaction Use Cases
+usecase "Create Playlist" as CreatePlaylist
+usecase "Add Event to Playlist" as AddToPlaylist
+usecase "Remove Event from Playlist" as RemoveFromPlaylist
+
+// Search and Discovery
+usecase "Search Events" as SearchEvents
+usecase "Recommended Events" as Recommendations
+usecase "Browse Genres" as BrowseGenres
+
+// Monetization
+usecase "Enable Monetization" as Monetize
+usecase "View Earnings" as ViewEarnings
+
+// Admin Use Cases
+usecase "Content Moderation" as Moderation
+usecase "User Management" as UserManagement
+usecase "Platform Settings" as PlatformSettings
+
+// Relationships
+Visitor --> BrowseEvents
+Visitor --> SearchEvents
+Visitor --> Login
+Visitor --> Register
+
+User --> Login
+User --> BrowseEvents
+User --> BookTicket
+User --> LeaveFeedback
+User --> SearchEvents
+User --> CreatePlaylist
+User --> AddToPlaylist
+User --> RemoveFromPlaylist
+User --> Recommendations
+User --> ManageProfile
+
+Creator --> CreateEvent
+Creator --> EditEvent
+Creator --> DeleteEvent
+Creator --> CreatePlaylist
+Creator --> BrowseGenres
+Creator --> Monetize
+Creator --> ViewEarnings
+
+Admin --> Moderation
+Admin --> UserManagement
+Admin --> PlatformSettings
+@enduml
+```
+---
 ## 7. Non-Functional Requirements
 
 ### 7.1 Performance
